@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nozhdar Explains English | تۆمارکردن</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;700;900&family=Noto+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2A4A;
+    --ink-soft:#2E3F63;
+    --paper:#F7F2E7;
+    --paper-2:#FBF8F1;
+    --gold:#C9A227;
+    --teal:#3F6E6E;
+    --charcoal:#262420;
+    --line: rgba(27,42,74,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--charcoal);
+    font-family:'Noto Sans Arabic', sans-serif;
+    line-height:1.7;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  .texture{
+    position:fixed; inset:0; pointer-events:none; opacity:.5; z-index:0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(27,42,74,0.03) 0, transparent 40%),
+      radial-gradient(circle at 80% 60%, rgba(201,162,39,0.05) 0, transparent 45%);
+  }
+
+  header.hero{
+    position:relative;
+    z-index:1;
+    background:var(--ink);
+    color:var(--paper-2);
+    overflow:hidden;
+    padding:0;
+  }
+  .brand{
+    max-width:1100px;
+    margin:0 auto;
+    padding:26px 28px 0;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Noto Kufi Arabic', sans-serif;
+    font-size:18px;
+    color:var(--gold);
+    letter-spacing:.02em;
+  }
+  .brand .dot{ width:6px; height:6px; border-radius:50%; background:var(--gold); }
+  .hero-inner{
+    max-width:1100px;
+    margin:0 auto;
+    padding:36px 28px 96px;
+    position:relative;
+    z-index:2;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:14px;
+    letter-spacing:.04em;
+    color:var(--gold);
+    font-weight:700;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:28px; height:1px; background:var(--gold);
+    display:inline-block;
+  }
+  h1.title{
+    font-family:'Noto Kufi Arabic', sans-serif;
+    font-size:clamp(32px, 5.2vw, 54px);
+    line-height:1.3;
+    margin:0 0 22px;
+    font-weight:700;
+    max-width:18ch;
+  }
+  h1.title em{
+    font-style:normal;
+    color:var(--gold);
+  }
+  .hero-sub{
+    font-size:clamp(16px,2vw,19px);
+    color:rgba(247,242,231,0.82);
+    max-width:56ch;
+    margin:0 0 36px;
+    font-weight:300;
+  }
+  .hero-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--gold);
+    color:var(--ink);
+    padding:15px 30px;
+    border-radius:3px;
+    font-weight:700;
+    font-size:16px;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    transition:transform .25s ease, box-shadow .25s ease;
+    box-shadow:0 8px 24px rgba(201,162,39,0.25);
+  }
+  .hero-cta:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(201,162,39,0.35); }
+
+  .book-motif{
+    position:absolute;
+    left:50%; top:50%;
+    transform:translate(-50%,-38%);
+    width:min(900px, 140vw);
+    opacity:.09;
+    z-index:1;
+    pointer-events:none;
+  }
+
+  .stats-strip{
+    position:relative; z-index:2;
+    display:flex; flex-wrap:wrap; gap:0;
+    border-top:1px solid rgba(247,242,231,0.15);
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .stats-strip .stat{
+    flex:1 1 160px;
+    padding:22px 28px;
+    border-left:1px solid rgba(247,242,231,0.15);
+  }
+  .stats-strip .stat:first-child{ border-right:1px solid rgba(247,242,231,0.15); }
+  .stat .num{
+    font-family:'Noto Kufi Arabic', sans-serif;
+    font-size:28px;
+    color:var(--gold);
+    display:block;
+  }
+  .stat .lbl{
+    font-size:13px;
+    color:rgba(247,242,231,0.7);
+  }
+
+  main{
+    position:relative; z-index:1;
+    max-width:1100px;
+    margin:0 auto;
+    padding:64px 28px 100px;
+  }
+
+  .section-head{
+    text-align:center;
+    max-width:640px;
+    margin:0 auto 46px;
+  }
+  .section-head .kicker{
+    color:var(--teal);
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:.06em;
+    margin-bottom:10px;
+    display:block;
+  }
+  .section-head h2{
+    font-family:'Noto Kufi Arabic', sans-serif;
+    font-size:clamp(24px,3.2vw,34px);
+    margin:0 0 12px;
+    color:var(--ink);
+  }
+  .section-head p{ color:#5a5648; font-size:15px; }
+
+  .book{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    background:var(--paper-2);
+    border-radius:6px;
+    box-shadow:0 20px 60px rgba(27,42,74,0.12), 0 2px 8px rgba(27,42,74,0.06);
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .book-spine{ position:relative; }
+  .book-spine::after{
+    content:"";
+    position:absolute;
+    top:0; bottom:0; right:0;
+    width:1px;
+    background:linear-gradient(to bottom, transparent, var(--line) 15%, var(--line) 85%, transparent);
+  }
+
+  .page{ padding:48px 44px; }
+  .page-left{
+    background:
+      linear-gradient(90deg, rgba(27,42,74,0.02), transparent 40%),
+      var(--paper-2);
+  }
+  .page-left h3{
+    font-family:'Noto Kufi Arabic', sans-serif;
+    font-size:22px;
+    color:var(--ink);
+    margin:0 0 8px;
+  }
+  .page-left .teacher-line{
+    color:var(--teal);
+    font-weight:700;
+    font-size:14px;
+    margin-bottom:28px;
+  }
+
+  .feature-list{
+    list-style:none;
+    margin:0 0 32px;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .feature-list li{ display:flex; gap:14px; align-items:flex-start; }
+  .feature-list .mark{
+    flex:none;
+    width:26px; height:26px;
+    border-radius:50%;
+    background:rgba(201,162,39,0.16);
+    color:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px;
+    font-weight:700;
+    margin-top:2px;
+  }
+  .feature-list .txt strong{
+    display:block;
+    color:var(--ink);
+    font-size:15px;
+    margin-bottom:2px;
+  }
+  .feature-list .txt span{ color:#68644f; font-size:13.5px; }
+
+  .quote{
+    border-right:3px solid var(--gold);
+    padding:14px 20px;
+    background:rgba(63,110,110,0.06);
+    border-radius:0 4px 4px 0;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .quote cite{
+    display:block;
+    margin-top:8px;
+    font-size:12.5px;
+    color:var(--teal);
+    font-style:normal;
+    font-weight:700;
+  }
+
+  .page-right{ background:var(--paper); }
+  .page-right h3{
+    font-family:'Noto Kufi Arabic', sans-serif;
+    font-size:22px;
+    color:var(--ink);
+    margin:0 0 6px;
+  }
+  .page-right .form-sub{
+    color:#68644f;
+    font-size:13.5px;
+    margin-bottom:26px;
+  }
+
+  form{ display:flex; flex-direction:column; gap:18px; }
+  .field{ display:flex; flex-direction:column; gap:7px; }
+  .field label{ font-size:13.5px; font-weight:700; color:var(--ink); }
+  .field .req{ color:var(--gold); }
+  .field input, .field select, .field textarea{
+    font-family:'Noto Sans Arabic', sans-serif;
+    font-size:15px;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    border-radius:4px;
+    background:#fff;
+    color:var(--charcoal);
+    outline:none;
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    border-color:var(--teal);
+    box-shadow:0 0 0 3px rgba(63,110,110,0.15);
+  }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:520px){ .row2{ grid-template-columns:1fr; } }
+
+  .submit-btn{
+    margin-top:6px;
+    background:var(--ink);
+    color:var(--paper-2);
+    border:none;
+    padding:16px 20px;
+    border-radius:4px;
+    font-size:16px;
+    font-weight:700;
+    font-family:'Noto Sans Arabic', sans-serif;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .submit-btn:hover{ background:var(--ink-soft); transform:translateY(-1px); }
+  .submit-btn:disabled{ opacity:.6; cursor:not-allowed; transform:none; }
+
+  .hint{ font-size:12px; color:#8a8570; text-align:center; margin-top:4px; }
+
+  .success-box{ display:none; text-align:center; padding:30px 10px 10px; }
+  .success-box .check{
+    width:56px;height:56px;
+    border-radius:50%;
+    background:rgba(201,162,39,0.15);
+    color:var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 18px;
+    font-size:26px;
+  }
+  .success-box h4{
+    font-family:'Noto Kufi Arabic', sans-serif;
+    color:var(--ink);
+    font-size:20px;
+    margin:0 0 8px;
+  }
+  .success-box p{ color:#68644f; font-size:14px; margin:0; }
+
+  @media (max-width:860px){
+    .book{ grid-template-columns:1fr; }
+    .book-spine::after{ display:none; }
+    .page{ padding:36px 26px; }
+    .page-left{ border-bottom:1px solid var(--line); }
+  }
+
+  footer{
+    text-align:center;
+    padding:30px 20px 46px;
+    color:#8a8570;
+    font-size:13px;
+    position:relative; z-index:1;
+  }
+
+  .admin-wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:40px 28px 80px;
+    position:relative; z-index:1;
+  }
+  .admin-table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--paper-2);
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(27,42,74,0.1);
+    font-size:14px;
+  }
+  .admin-table th, .admin-table td{
+    padding:12px 14px;
+    text-align:right;
+    border-bottom:1px solid var(--line);
+  }
+  .admin-table th{
+    background:var(--ink);
+    color:var(--paper-2);
+    font-weight:700;
+    font-size:13px;
+  }
+  .admin-table tr:last-child td{ border-bottom:none; }
+  .admin-empty{ text-align:center; color:#8a8570; padding:40px; }
+</style>
+</head>
+<body>
+
+<div class="texture"></div>
+
+<header class="hero">
+  <div class="brand"><span class="dot"></span>Nozhdar Explains English</div>
+  <svg class="book-motif" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M200 20 C160 5 90 5 40 25 L40 210 C90 190 160 190 200 205 Z" stroke="#F7F2E7" stroke-width="2"/>
+    <path d="M200 20 C240 5 310 5 360 25 L360 210 C310 190 240 190 200 205 Z" stroke="#F7F2E7" stroke-width="2"/>
+    <line x1="200" y1="20" x2="200" y2="205" stroke="#C9A227" stroke-width="2"/>
+    <line x1="60" y1="50" x2="180" y2="42" stroke="#F7F2E7" stroke-width="1.5"/>
+    <line x1="60" y1="75" x2="180" y2="67" stroke="#F7F2E7" stroke-width="1.5"/>
+    <line x1="60" y1="100" x2="180" y2="92" stroke="#F7F2E7" stroke-width="1.5"/>
+    <line x1="220" y1="42" x2="340" y2="50" stroke="#F7F2E7" stroke-width="1.5"/>
+    <line x1="220" y1="67" x2="340" y2="75" stroke="#F7F2E7" stroke-width="1.5"/>
+    <line x1="220" y1="92" x2="340" y2="100" stroke="#F7F2E7" stroke-width="1.5"/>
+  </svg>
+  <div class="hero-inner">
+    <span class="eyebrow">دەورەی زمانی ئینگلیزی · تۆمارکردنی وانەی نوێ</span>
+    <h1 class="title">دەستپێبکە بە گەشتی <em>فێربوونی ئینگلیزی</em></h1>
+    <p class="hero-sub">دەورەیەکی چڕوپڕ لەگەڵ مامۆستا، بە گروپی بچووک و چاودێری تاکەکەسی، لە بنەڕەتەوە تا قسەکردنی بێ کۆسپ. ئێستا شوێنی خۆت تۆمار بکە پێش پڕبوونی ژمارە.</p>
+    <a href="#تۆمارکردن" class="hero-cta">ئێستا تۆمار بکە ←</a>
+  </div>
+  <div class="stats-strip">
+    <div class="stat"><span class="num">4</span><span class="lbl">ئاستی خوێندن</span></div>
+    <div class="stat"><span class="num">12</span><span class="lbl">هەفتەی دەورە</span></div>
+    <div class="stat"><span class="num">10</span><span class="lbl">زۆرترین ژمارە بۆ گروپ</span></div>
+  </div>
+</header>
+
+<main>
+  <div class="section-head">
+    <span class="kicker">تۆمارکردن ئێستا کراوەیە</span>
+    <h2>شوێنی خۆت لە دەورەکەدا مسۆگەر بکە</h2>
+    <p>زانیارییەکانی خوارەوە پڕ بکەرەوە، مامۆستا پەیوەندیت پێوە دەکات بۆ دڵنیابوونەوە لە تۆمارکردن و دیاریکردنی کاتی گونجاو.</p>
+  </div>
+
+  <div class="book" id="تۆمارکردن">
+    <div class="page page-left book-spine">
+      <h3>چی فێردەبیت؟</h3>
+      <div class="teacher-line">چاودێری ڕاستەوخۆ لەلایەن مامۆستاوە</div>
+
+      <ul class="feature-list">
+        <li>
+          <span class="mark">1</span>
+          <span class="txt"><strong>بنەماکانی ڕێزمان و وشە</strong><span>بنیاتێکی پتەو بۆ زمان لە سەرەتاوە، یان نوێکردنەوەی ئەوەی پێشتر فێربوویت</span></span>
+        </li>
+        <li>
+          <span class="mark">2</span>
+          <span class="txt"><strong>گفتوگۆ و متمانە بە قسەکردن</strong><span>کۆبوونەوەی گفتوگۆی هەفتانە بۆ شکاندنی کۆسپی قسەکردن</span></span>
+        </li>
+        <li>
+          <span class="mark">3</span>
+          <span class="txt"><strong>نووسین و خوێندنەوەی کاربەستی</strong><span>ڕاهێنان و ئەرکی ماڵەوە بە تێبینی کەسی ڕاستکراوەتەوە</span></span>
+        </li>
+        <li>
+          <span class="mark">4</span>
+          <span class="txt"><strong>تاقیکردنەوە و ڕاوێژکاری دیاریکردنی ئاست</strong><span>بۆ دانانت لە گونجاوترین گروپ بۆ ئاستەکەت</span></span>
+        </li>
+      </ul>
+
+      <div class="quote">
+        "دەورەکە شێوازی بیرکردنەوەم بە زمانەکەی گۆڕی، توانیم بە متمانەوە قسە بکەم دوای چەند هەفتەیەکی کەم."
+        <cite>— لە هەڵسەنگاندنی خوێندکارانی وانەی پێشوو</cite>
+      </div>
+    </div>
+
+    <div class="page page-right">
+      <h3>فۆرمی تۆمارکردن</h3>
+      <p class="form-sub">خانە دیاریکراوەکان بە <span style="color:var(--gold); font-weight:700;">*</span> پێویستن</p>
+
+      <form id="regForm">
+        <div class="field">
+          <label for="name">ناوی تەواو <span class="req">*</span></label>
+          <input type="text" id="name" required placeholder="نموونە: ساڵار ئەحمەد">
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label for="phone">ژمارەی مۆبایل <span class="req">*</span></label>
+            <input type="tel" id="phone" required placeholder="07xxxxxxxx">
+          </div>
+          <div class="field">
+            <label for="age">تەمەن</label>
+            <input type="number" id="age" min="5" max="90" placeholder="ئارەزوومەندانەیە">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="level">ئاستی ئێستا <span class="req">*</span></label>
+          <select id="level" required>
+            <option value="" disabled selected>ئاستی خۆت هەڵبژێرە</option>
+            <option value="سەرەتایی">سەرەتایی — هیچ نازانم</option>
+            <option value="بنەڕەتی">بنەڕەتی — چەند وشە و ڕستەیەکی سادە دەزانم</option>
+            <option value="ناوەند">ناوەند — بە شێوەیەکی سنووردار دەخوێنمەوە و قسە دەکەم</option>
+            <option value="پێشکەوتوو">پێشکەوتوو — دەمەوێت پەرشی قسەکردنم چاک بکەم</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="schedule">کاتی پەسەندکراو بۆ وانەکان</label>
+          <select id="schedule">
+            <option value="بەیانیان">بەیانیان</option>
+            <option value="نیوەڕۆ">نیوەڕۆ</option>
+            <option value="ئێوارە" selected>ئێوارە</option>
+            <option value="مرن">مرن — هەر کاتێک</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="notes">تێبینی زیاتر</label>
+          <textarea id="notes" rows="3" placeholder="هەر شتێک دەتەوێت مامۆستا لەبارەی تۆوە یان ئامانجت لە دەورەکە بزانێت"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">دڵنیاکردنەوەی تۆمارکردن</button>
+        <p class="hint">لە ماوەی ٢٤–٤٨ کاتژمێردا پەیوەندیت پێوە دەکرێت بۆ دڵنیاکردنەوەی شوێن</p>
+      </form>
+
+      <div class="success-box" id="successBox">
+        <div class="check">✓</div>
+        <h4>تۆمارکردنەکەت بە سەرکەوتوویی وەرگیرا</h4>
+        <p>سوپاس! مامۆستا بەم زووانە پەیوەندیت پێوە دەکات بۆ وردەکارییەکان.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>© Nozhdar Explains English — هەموو زانیارییەکان بە نهێنی هەڵدەگیرێن تەنها بۆ مەبەستی تۆمارکردن</footer>
+
+<div class="admin-wrap" id="adminPanel" style="display:none;">
+  <div class="section-head">
+    <span class="kicker">پانێڵی مامۆستا</span>
+    <h2>خوێندکارانی تۆمارکراو</h2>
+    <p>ئەم دیمەنە تەنها کاتێک دەردەکەوێت کە <code>?admin=1</code> زیاد بکرێت بۆ لینکی لاپەڕەکە</p>
+  </div>
+  <div id="adminContent"></div>
+</div>
+
+<script>
+  const form = document.getElementById('regForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const successBox = document.getElementById('successBox');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'لە ناردندایە...';
+
+    const entry = {
+      name: document.getElementById('name').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      age: document.getElementById('age').value.trim(),
+      level: document.getElementById('level').value,
+      schedule: document.getElementById('schedule').value,
+      notes: document.getElementById('notes').value.trim(),
+      submittedAt: new Date().toISOString()
+    };
+
+    try {
+      const key = 'student:' + Date.now() + ':' + Math.random().toString(36).slice(2,7);
+      const result = await window.storage.set(key, JSON.stringify(entry), true);
+      if (!result) throw new Error('save failed');
+      form.style.display = 'none';
+      successBox.style.display = 'block';
+    } catch (err) {
+      console.error(err);
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'دڵنیاکردنەوەی تۆمارکردن';
+      alert('هەڵەیەک ڕوویدا لە کاتی ناردنی تۆمارکردن، تکایە دووبارە هەوڵ بدەوە.');
+    }
+  });
+
+  async function loadAdmin(){
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('admin') !== '1') return;
+
+    document.querySelector('header.hero').style.display = 'none';
+    document.querySelector('main').style.display = 'none';
+    const panel = document.getElementById('adminPanel');
+    const content = document.getElementById('adminContent');
+    panel.style.display = 'block';
+
+    try {
+      const list = await window.storage.list('student:', true);
+      if (!list || !list.keys || list.keys.length === 0){
+        content.innerHTML = '<div class="admin-empty">هێشتا هیچ خوێندکارێک تۆمار نەکراوە</div>';
+        return;
+      }
+      const rows = [];
+      for (const key of list.keys){
+        try {
+          const res = await window.storage.get(key, true);
+          if (res && res.value) rows.push(JSON.parse(res.value));
+        } catch(e){ /* skip */ }
+      }
+      rows.sort((a,b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+
+      let html = '<table class="admin-table"><thead><tr>' +
+        '<th>ناو</th><th>ژمارەی مۆبایل</th><th>تەمەن</th><th>ئاست</th><th>کاتی پەسەندکراو</th><th>تێبینی</th><th>بەرواری تۆمارکردن</th>' +
+        '</tr></thead><tbody>';
+      rows.forEach(r => {
+        const date = new Date(r.submittedAt).toLocaleString('en-GB');
+        html += `<tr>
+          <td>${escapeHtml(r.name)}</td>
+          <td>${escapeHtml(r.phone)}</td>
+          <td>${escapeHtml(r.age || '—')}</td>
+          <td>${escapeHtml(r.level)}</td>
+          <td>${escapeHtml(r.schedule)}</td>
+          <td>${escapeHtml(r.notes || '—')}</td>
+          <td>${date}</td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      content.innerHTML = html;
+    } catch (err){
+      content.innerHTML = '<div class="admin-empty">نەتوانرا زانیاری خوێندکاران بار بکرێت</div>';
+    }
+  }
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  loadAdmin();
+</script>
+
+</body>
+</html>
