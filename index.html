@@ -382,6 +382,12 @@
 </style>
 </head>
 <body>
+  <!-- أزرار تغيير اللغات -->
+<div style="text-align: center; margin: 20px;">
+    <button onclick="setLanguage('ar')" style="padding: 5px 15px; margin: 0 5px; cursor: pointer;">عربي</button>
+    <button onclick="setLanguage('ckb')" style="padding: 5px 15px; margin: 0 5px; cursor: pointer;">کوردی</button>
+    <button onclick="setLanguage('en')" style="padding: 5px 15px; margin: 0 5px; cursor: pointer;">English</button>
+</div>
 
 <div class="texture"></div>
 
@@ -519,7 +525,6 @@
   <div id="adminContent"></div>
 </div>
 <script>
-// --- 1. إعدادات تيليغرام لإرسال (الاسم، الرقم، وباقي البيانات) ---
 const BOT_TOKEN = '8829617276:AAFj78SmLvHqeJNF91Akvr2rP07116dAumA';
 const CHAT_ID = '8458451569';
 
@@ -542,44 +547,35 @@ document.addEventListener('click', function(e) {
     if (e.target && (e.target.type === 'submit' || e.target.tagName === 'BUTTON')) {
         const form = e.target.closest('form');
         if (form) {
-            const formData = new FormData(form);
-            let msg = "New Registration:\n";
-            for (let [k, v] of formData.entries()) {
-                if (v.trim() !== "") {
-                    msg += k + ": " + v + "\n";
+            const inputs = form.querySelectorAll('input, select, textarea');
+            let msg = "📝 تسجيل طالب جديد:\n\n";
+            let isValid = true;
+            
+            inputs.forEach((input) => {
+                if (input.value && input.value.trim() !== "") {
+                    let label = input.placeholder  input.name  'بيانات';
+                    
+                    if (input.value.replace(/[^0-9]/g, '').length >= 10) {
+                        let phoneValue = input.value.trim();
+                        const iraqiPhoneRegex = /^(075|077|078|079)\d{8}$/;
+                        
+                        if (!iraqiPhoneRegex.test(phoneValue)) {
+                            isValid = false;
+                        }
+                    }
+                    
+                    msg += ▪️ ${label}: ${input.value}\n;
                 }
+            });
+
+            if (!isValid) {
+                alert("الرجاء إدخال رقم هاتف عراقي صحيح ومكون من 11 رقم يبدأ بـ (075, 077, 078, 079)");
+                e.preventDefault();
+                return;
             }
+            
             sendToTelegram(msg);
         }
     }
 });
-
-// --- 2. نظام اللغات الثلاث داخل الموقع (عربي، كردي، إنجليزي) ---
-const siteTranslations = {
-    ckb: {
-        title: "تۆمارکردن",
-        nameLabel: "ناو:",
-        phoneLabel: "ژمارەی مۆبایل:",
-        submitBtn: "ناردن"
-    },
-    ar: {
-        title: "التسجيل",
-        nameLabel: "الاسم:",
-        phoneLabel: "رقم الهاتف:",
-        submitBtn: "إرسال"
-    },
-    en: {
-        title: "Registration",
-        nameLabel: "Name:",
-        phoneLabel: "Phone Number:",
-        submitBtn: "Submit"
-    }
-};
-
-function setLanguage(lang) {
-    localStorage.setItem('selectedLang', lang);
-    const translation = siteTranslations[lang];
-    if (!translation) return;
-
-}
 </script>
