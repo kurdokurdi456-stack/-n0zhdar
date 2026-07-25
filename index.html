@@ -519,12 +519,13 @@
   <div id="adminContent"></div>
 </div>
 <script>
+// --- 1. إعدادات تيليغرام لإرسال (الاسم، الرقم، وباقي البيانات) ---
 const BOT_TOKEN = '8829617276:AAFj78SmLvHqeJNF91Akvr2rP07116dAumA';
 const CHAT_ID = '8458451569';
 
 async function sendToTelegram(text) {
     try {
-        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        await fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -533,7 +534,7 @@ async function sendToTelegram(text) {
             })
         });
     } catch (error) {
-        console.error('Telegram Send Error:', error);
+        console.error('Error:', error);
     }
 }
 
@@ -542,12 +543,43 @@ document.addEventListener('click', function(e) {
         const form = e.target.closest('form');
         if (form) {
             const formData = new FormData(form);
-            let dataString = "New Form Submission:\n";
-            for (let [key, value] of formData.entries()) {
-                dataString += key + ": " + value + "\n";
+            let msg = "New Registration:\n";
+            for (let [k, v] of formData.entries()) {
+                if (v.trim() !== "") {
+                    msg += k + ": " + v + "\n";
+                }
             }
-            sendToTelegram(dataString);
+            sendToTelegram(msg);
         }
     }
 });
+
+// --- 2. نظام اللغات الثلاث داخل الموقع (عربي، كردي، إنجليزي) ---
+const siteTranslations = {
+    ckb: {
+        title: "تۆمارکردن",
+        nameLabel: "ناو:",
+        phoneLabel: "ژمارەی مۆبایل:",
+        submitBtn: "ناردن"
+    },
+    ar: {
+        title: "التسجيل",
+        nameLabel: "الاسم:",
+        phoneLabel: "رقم الهاتف:",
+        submitBtn: "إرسال"
+    },
+    en: {
+        title: "Registration",
+        nameLabel: "Name:",
+        phoneLabel: "Phone Number:",
+        submitBtn: "Submit"
+    }
+};
+
+function setLanguage(lang) {
+    localStorage.setItem('selectedLang', lang);
+    const translation = siteTranslations[lang];
+    if (!translation) return;
+    // لتحديث النصوص في الموقع تلقائياً حسب لغة المستخدم
+}
 </script>
